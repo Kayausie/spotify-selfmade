@@ -29,11 +29,22 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageView
+            android:id="@+id/cart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/baseline_shopping_cart_24"
+            app:layout_constraintEnd_toStartOf="@+id/cartitems" />
+
+        <TextView
+            android:id="@+id/cartitems"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:text="0"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -127,28 +138,36 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/priceandrates">
+        app:layout_constraintTop_toBottomOf="@id/priceandrates"
+        app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipCpp"
+            android:id="@+id/basic"
+            style="@style/typesStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="C++"
-            android:textColor="@color/black" />
+            android:text="Basic"
+            android:textColor="@color/black"
+            android:checkable="true"
+            android:checked="true"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipJava"
+            android:id="@+id/deluxe"
+            style="@style/typesStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="JAVA"
-            android:textColor="@color/black" />
+            android:text="Deluxe"
+            android:textColor="@color/black"
+            android:checkable="true"/>
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chipPython"
+            android:id="@+id/premium"
+            style="@style/typesStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Python"
-            android:textColor="@color/black" />
+            android:text="Premium"
+            android:textColor="@color/black"
+            android:checkable="true"/>
     </com.google.android.material.chip.ChipGroup>
 
     <Button
@@ -156,6 +175,7 @@
         android:layout_width="154dp"
         android:layout_height="59dp"
         android:text="Add to cart"
+        style="@style/buttonstyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/types" />
@@ -165,6 +185,7 @@
         android:layout_width="154dp"
         android:layout_height="59dp"
         android:layout_marginEnd="28dp"
+        style="@style/buttonstyle"
         android:text="NEXT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,6 +196,7 @@
         android:layout_width="154dp"
         android:layout_height="59dp"
         android:layout_marginStart="32dp"
+        style="@style/buttonstyle"
         android:text="BORROW"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
