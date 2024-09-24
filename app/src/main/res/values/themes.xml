@@ -13,8 +13,12 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">20dp</item>
     </style>
-    <style name="typesStyle" parent="Widget.MaterialComponents.Chip.Action">
-        <item name="android:textStyle">italic</item>
+    <style name="CustomChipTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textStyle">italic</item> <!-- Set text to italic -->
+        <item name="fontFamily">@font/helvetica</item> <!-- Set custom font -->
+    </style>
+    <style name="CustomChipStyle" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:textAppearance">@style/CustomChipTextAppearance</item> <!-- Apply custom text appearance -->
     </style>
     <style name="bigtext" parent="Widget.MaterialComponents.TextView">
         <item name="android:gravity">center</item>
