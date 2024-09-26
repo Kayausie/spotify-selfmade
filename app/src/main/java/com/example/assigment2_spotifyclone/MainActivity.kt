@@ -1,5 +1,7 @@
 package com.example.assigment2_spotifyclone
 
+import android.app.Activity
+import android.content.Intent
 import android.media.Image
 import android.os.Bundle
 import android.widget.Button
@@ -7,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -18,6 +21,17 @@ import com.google.android.material.chip.ChipGroup
 class MainActivity : AppCompatActivity() {
     private val viewModel:SongModel by viewModels()
     val cart= mutableListOf<SongData>()
+    val money = 1000
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode==Activity.RESULT_OK && it.data != null){
+            val save=it.data?.getBooleanExtra("save",true)
+            if(save==false) {
+                val intent = intent
+                finish() // Close the current activity
+                startActivity(intent)
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,11 +60,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
             }
             else{
-                when{
-                    findViewById<Chip>(R.id.deluxe).isChecked->cart.remove(viewModel.deluxepack())
-                    findViewById<Chip>(R.id.premium).isChecked->cart.remove(viewModel.premiumpack())
-                    else->cart.remove(viewModel.viewvalue())
-                }
+                cart.removeIf{it.name==viewModel.viewvalue().name}
                 viewModel.viewvalue().added=false
                 findViewById<Button>(R.id.addtocart).setText("Add to cart")
                 findViewById<TextView>(R.id.cartitems).setText(cart.size.toString())
@@ -77,6 +87,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        findViewById<Button>(R.id.borrow).setOnClickListener{
+            val intent =Intent(this,SecondActivity::class.java)
+            for(item:SongData in cart){
+                intent.putExtra("cart"+cart.indexOf(item).toString(),item)
+            }
+            intent.putExtra("cartNumber",cart.size)
+            launcher.launch(intent)
+        }
     }
     fun setproduct(song:SongData):Unit{
         val productView=findViewById<ImageView>(R.id.productView).setImageDrawable(AppCompatResources.getDrawable(this,song.imgurl))
@@ -92,6 +110,7 @@ class MainActivity : AppCompatActivity() {
         else{
             findViewById<Button>(R.id.addtocart).setText("Add to cart")
         }
+        findViewById<TextView>(R.id.money).setText(money.toString()+"$")
         val cartitems=findViewById<TextView>(R.id.cartitems).setText(cart.size.toString())
     }
 
