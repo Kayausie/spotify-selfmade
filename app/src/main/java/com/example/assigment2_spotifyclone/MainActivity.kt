@@ -20,8 +20,8 @@ import com.google.android.material.chip.ChipGroup
 
 class MainActivity : AppCompatActivity() {
     private val viewModel:SongModel by viewModels()
-    val cart= mutableListOf<SongData>()
-    var money =100
+    private val cart= mutableListOf<SongData>()
+    private var money =100
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode==Activity.RESULT_OK && it.data != null){
             val save=it.data?.getBooleanExtra("save",true)
@@ -50,10 +50,15 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         setproduct(viewModel.viewvalue())
-        val nextbutton=findViewById<Button>(R.id.next)
-        nextbutton.setOnClickListener{
+        val nextButton=findViewById<Button>(R.id.next)
+        nextButton.setOnClickListener{
             viewModel.next()
-            setproduct(viewModel.viewvalue())
+            when{
+                findViewById<Chip>(R.id.deluxe).isChecked->setproduct(viewModel.deluxepack())
+                findViewById<Chip>(R.id.premium).isChecked->setproduct(viewModel.premiumpack())
+                else->setproduct(viewModel.viewvalue())
+            }
+
         }
         findViewById<Button>(R.id.addtocart).setOnClickListener{
             if(!viewModel.viewvalue().added) {
@@ -63,33 +68,30 @@ class MainActivity : AppCompatActivity() {
                     else->cart.add(viewModel.viewvalue())
                 }
                 viewModel.viewvalue().added=true
-                findViewById<Button>(R.id.addtocart).setText("Unadd from cart")
+                findViewById<Button>(R.id.addtocart).setText(R.string.unaddtocart)
                 findViewById<TextView>(R.id.cartitems).setText(cart.size.toString())
                 Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
             }
             else{
                 cart.removeIf{it.name==viewModel.viewvalue().name}
                 viewModel.viewvalue().added=false
-                findViewById<Button>(R.id.addtocart).setText("Add to cart")
+                findViewById<Button>(R.id.addtocart).setText(R.string.addtocart)
                 findViewById<TextView>(R.id.cartitems).setText(cart.size.toString())
                 Toast.makeText(this, "Unadded from cart", Toast.LENGTH_SHORT).show()
             }
 
         }
-        findViewById<ChipGroup>(R.id.types).setOnCheckedStateChangeListener { group, checkedIds ->
-            // Check if any chip is selected
+        findViewById<ChipGroup>(R.id.types).setOnCheckedStateChangeListener { _, checkedIds ->
+
             if (checkedIds.isNotEmpty()) {
-                when (checkedIds[0]) {  // We use [0] because it's single selection
+                when (checkedIds[0]) {
                     R.id.basic -> {
-                        // Update the price to basic price
                         findViewById<TextView>(R.id.price).text = viewModel.viewvalue().price.toString() + "$/m"
                     }
                     R.id.premium -> {
-                        // Update the price to premium pack price
                         findViewById<TextView>(R.id.price).text = viewModel.premiumpack().price.toString() + "$/m"
                     }
                     R.id.deluxe -> {
-                        // Update the price to deluxe pack price
                         findViewById<TextView>(R.id.price).text = viewModel.deluxepack().price.toString() + "$/m"
                     }
                 }
@@ -105,22 +107,22 @@ class MainActivity : AppCompatActivity() {
             launcher.launch(intent)
         }
     }
-    fun setproduct(song:SongData):Unit{
-        val productView=findViewById<ImageView>(R.id.productView).setImageDrawable(AppCompatResources.getDrawable(this,song.imgurl))
-        val trackname= findViewById<TextView>(R.id.trackname).setText(song.name)
-        val prodYear=findViewById<TextView>(R.id.prodyear).setText("Produced "+song.prodYear)
-        val listens=findViewById<TextView>(R.id.listens).setText(song.listens.toString()+"K listens")
+    fun setproduct(song:SongData){
+       findViewById<ImageView>(R.id.productView).setImageDrawable(AppCompatResources.getDrawable(this,song.imgurl))
+        findViewById<TextView>(R.id.trackname).setText(song.name)
+       findViewById<TextView>(R.id.prodyear).setText("Produced "+song.prodYear)
+        findViewById<TextView>(R.id.listens).setText(song.listens.toString()+"K listens")
         val rate = findViewById<androidx.appcompat.widget.AppCompatRatingBar>(R.id.rate)
         rate.rating=song.rate
-        val price = findViewById<TextView>(R.id.price).setText(song.price.toString()+"$/m")
+         findViewById<TextView>(R.id.price).setText(song.price.toString()+"$/m")
         if(viewModel.viewvalue().added){
-            findViewById<Button>(R.id.addtocart).setText("Unadd from cart")
+            findViewById<Button>(R.id.addtocart).setText(R.string.unaddtocart)
         }
         else{
-            findViewById<Button>(R.id.addtocart).setText("Add to cart")
+            findViewById<Button>(R.id.addtocart).setText(R.string.addtocart)
         }
         findViewById<TextView>(R.id.money).setText(money.toString()+"$")
-        val cartitems=findViewById<TextView>(R.id.cartitems).setText(cart.size.toString())
+        findViewById<TextView>(R.id.cartitems).setText(cart.size.toString())
     }
 
 }

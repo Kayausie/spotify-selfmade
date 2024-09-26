@@ -12,4 +12,6 @@ data class SongData(
     var price:Int,
     val rate:Float,
     var added:Boolean=false
-):Parcelable{}
+):Parcelable{
+
+}

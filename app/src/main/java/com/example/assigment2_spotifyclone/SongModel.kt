@@ -25,7 +25,7 @@ class SongModel : ViewModel(){
     }
     fun next(){
         if(_indexState.value==3){
-            reset()
+            _indexState.value=0
         }
         else{
             _indexState.value+=1
