@@ -26,6 +26,7 @@ class SecondActivity:AppCompatActivity() {
             insets
         }
         var save=false
+        var checkedout=false
         val numberincarts:Int=intent.getIntExtra("cartNumber",0)
         var total=0
         for(i in 0 until numberincarts){
@@ -54,6 +55,7 @@ class SecondActivity:AppCompatActivity() {
         }
         findViewById<TextView>(R.id.total).setText(total.toString()+"$")
         findViewById<TextView>(R.id.cartitems).setText(intent.getIntExtra("cartNumber",0).toString())
+        findViewById<TextView>(R.id.money1).setText(intent.getIntExtra("money",0).toString()+"$")
         findViewById<Button>(R.id.goback).setOnClickListener{
             if(!save) {
                 val builder = AlertDialog.Builder(this)
@@ -82,6 +84,18 @@ class SecondActivity:AppCompatActivity() {
             save=true
             Toast.makeText(this, "Saved Successfullly", Toast.LENGTH_SHORT).show()
         }
-
+        findViewById<Button>(R.id.checkout).setOnClickListener{
+            if(total>=intent.getIntExtra("money",0)){
+                Toast.makeText(this, "Error: total exceeded credits, please go back and change the booking", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val intent1 = Intent(this, MainActivity::class.java)
+                checkedout=true
+                intent1.putExtra("checkedout",checkedout)
+                intent1.putExtra("checkout",intent.getIntExtra("money",0)-total)
+                setResult(RESULT_OK,intent1)
+                finish()
+            }
+        }
     }
 }

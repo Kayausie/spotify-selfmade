@@ -21,14 +21,22 @@ import com.google.android.material.chip.ChipGroup
 class MainActivity : AppCompatActivity() {
     private val viewModel:SongModel by viewModels()
     val cart= mutableListOf<SongData>()
-    val money = 1000
+    var money =100
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode==Activity.RESULT_OK && it.data != null){
             val save=it.data?.getBooleanExtra("save",true)
+            val checkedout=it.data?.getBooleanExtra("checkedout",false)
             if(save==false) {
                 val intent = intent
                 finish() // Close the current activity
                 startActivity(intent)
+            }
+            if(checkedout==true){
+                cart.clear()
+                viewModel.reset()
+                val moneychecked=it.data?.getIntExtra("checkout",0)?:0
+                money=moneychecked
+                setproduct(viewModel.viewvalue())
             }
         }
     }
@@ -93,6 +101,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("cart"+cart.indexOf(item).toString(),item)
             }
             intent.putExtra("cartNumber",cart.size)
+            intent.putExtra("money",money)
             launcher.launch(intent)
         }
     }

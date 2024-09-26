@@ -18,6 +18,10 @@ class SongModel : ViewModel(){
     val indexState: StateFlow<Int> =_indexState.asStateFlow()
     fun reset(){
         _indexState.value=0
+        for (i in songs){
+            i.added=false
+        }
+
     }
     fun next(){
         if(_indexState.value==3){
