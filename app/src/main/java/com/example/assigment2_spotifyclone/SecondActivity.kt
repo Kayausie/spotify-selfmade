@@ -92,6 +92,7 @@ class SecondActivity:AppCompatActivity() {
             }
             else{
                 val intent1 = Intent(this, MainActivity::class.java)
+                Toast.makeText(this, "Check out successfully", Toast.LENGTH_SHORT).show()
                 checkedout=true
                 intent1.putExtra("checkedout",checkedout)
                 intent1.putExtra("checkout",intent.getIntExtra("money",0)-total)
