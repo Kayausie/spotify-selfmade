@@ -3,6 +3,7 @@ package com.example.assigment2_spotifyclone
 import android.app.Activity
 import android.content.Intent
 import android.media.Image
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
@@ -105,6 +106,10 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("cartNumber",cart.size)
             intent.putExtra("money",money)
             launcher.launch(intent)
+        }
+        findViewById<ImageView>(R.id.logo).setOnClickListener{
+            val intentemail=Intent(Intent.ACTION_VIEW, Uri.parse("https://open.spotify.com/"))
+            startActivity(intentemail)
         }
     }
     fun setproduct(song:SongData){

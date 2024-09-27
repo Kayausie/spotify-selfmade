@@ -1,9 +1,11 @@
 package com.example.assigment2_spotifyclone
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
@@ -96,6 +98,10 @@ class SecondActivity:AppCompatActivity() {
                 setResult(RESULT_OK,intent1)
                 finish()
             }
+        }
+        findViewById<ImageView>(R.id.logo).setOnClickListener{
+            val intentemail=Intent(Intent.ACTION_VIEW, Uri.parse("https://open.spotify.com/"))
+            startActivity(intentemail)
         }
     }
 }

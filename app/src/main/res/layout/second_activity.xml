@@ -11,16 +11,25 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-            android:layout_width="wrap_content"
-            style="@style/ProdandListen"
-            android:layout_height="match_parent"
             android:id="@+id/money1"
-            android:text="0$"
+            style="@style/ProdandListen"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
-            />
+            android:text="0$" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/spotify"
+            android:layout_gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cartLayout"
