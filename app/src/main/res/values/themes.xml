@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Assigment2spotifyclone" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="android:colorBackground">@color/slightblack</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/helveticabold</item>
+    </style>
+    <style name="ProdandListen" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+    <style name="CustomChipTextAppearance" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textStyle">italic</item> <!-- Set text to italic -->
+        <item name="fontFamily">@font/helvetica</item> <!-- Set custom font -->
+    </style>
+    <style name="CustomChipStyle" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="android:textAppearance">@style/CustomChipTextAppearance</item> <!-- Apply custom text appearance -->
+    </style>
+    <style name="bigtext" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">32dp</item>
+    </style>
+    <style name="buttonstyle" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">10sp</item>
+    </style>
+    <style name="Theme.Assigment2spotifyclone" parent="Base.Theme.Assigment2spotifyclone" />
+</resources>

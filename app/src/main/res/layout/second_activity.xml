@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/second"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/money1"
+            style="@style/ProdandListen"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center_vertical"
+            android:text="0$" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/spotify"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cartLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/baseline_shopping_cart_24"
+            app:layout_constraintEnd_toStartOf="@+id/cartitems" />
+
+        <TextView
+            android:id="@+id/cartitems"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="16dp"
+            android:text="0"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/bigtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RECEIPT"
+        app:layout_constraintTop_toBottomOf="@+id/cartLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/receiptable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="16dp">
+
+            <TableRow>
+
+                <TextView
+                    style="@style/ProdandListen"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="2"
+                    android:padding="8dp"
+                    android:text="Name"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/ProdandListen"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="Price"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/totallayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            app:layout_constraintBottom_toBottomOf="@id/receiptable">
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/ProdandListen"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:text="TOTAL"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.75" />
+
+            <TextView
+                android:id="@+id/total"
+                style="@style/ProdandListen"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:text="25$"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/save"
+        style="@style/buttonstyle"
+        android:layout_width="154dp"
+        android:layout_height="59dp"
+        android:text="SAVE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receiptable"
+        app:layout_constraintVertical_bias="0.231" />
+
+    <Button
+        android:id="@+id/checkout"
+        style="@style/buttonstyle"
+        android:layout_width="154dp"
+        android:layout_height="59dp"
+        android:layout_marginEnd="28dp"
+        android:text="CHECK OUT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receiptable"
+        app:layout_constraintVertical_bias="0.589" />
+
+    <Button
+        style="@style/buttonstyle"
+        android:id="@+id/goback"
+        android:layout_width="154dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="32dp"
+        android:text="GO BACK"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/receiptable"
+        app:layout_constraintVertical_bias="0.589" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
